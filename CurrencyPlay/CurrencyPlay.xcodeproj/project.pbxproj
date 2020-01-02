@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,11 @@
 		479BE7AE23B8C3BC00FEB132 /* ExchangeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479BE7AD23B8C3BC00FEB132 /* ExchangeListViewController.swift */; };
 		479BE7B323B8C3BE00FEB132 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479BE7B223B8C3BE00FEB132 /* Assets.xcassets */; };
 		479BE7B623B8C3BE00FEB132 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479BE7B423B8C3BE00FEB132 /* LaunchScreen.storyboard */; };
+		47E6259F23BE7C6700033159 /* PrivatBankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E6259E23BE7C6700033159 /* PrivatBankAPI.swift */; };
+		47E625A123BE7D1000033159 /* Moya+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E625A023BE7D1000033159 /* Moya+Defaults.swift */; };
+		47E625A423BE810500033159 /* PrivatBankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E625A323BE810500033159 /* PrivatBankService.swift */; };
+		47E625A623BE818E00033159 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E625A523BE818E00033159 /* ResponseParser.swift */; };
+		47E625A823BE865400033159 /* PrivatCurrencyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E625A723BE865400033159 /* PrivatCurrencyItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +28,11 @@
 		479BE7B223B8C3BE00FEB132 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		479BE7B523B8C3BE00FEB132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		479BE7B723B8C3BE00FEB132 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47E6259E23BE7C6700033159 /* PrivatBankAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatBankAPI.swift; sourceTree = "<group>"; };
+		47E625A023BE7D1000033159 /* Moya+Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Defaults.swift"; sourceTree = "<group>"; };
+		47E625A323BE810500033159 /* PrivatBankService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatBankService.swift; sourceTree = "<group>"; };
+		47E625A523BE818E00033159 /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
+		47E625A723BE865400033159 /* PrivatCurrencyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatCurrencyItem.swift; sourceTree = "<group>"; };
 		47EF2E7DE1CCE3D5E58630C0 /* Pods-CurrencyPlay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyPlay.debug.xcconfig"; path = "Target Support Files/Pods-CurrencyPlay/Pods-CurrencyPlay.debug.xcconfig"; sourceTree = "<group>"; };
 		7571680089CFD83462D3221E /* Pods-CurrencyPlay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyPlay.release.xcconfig"; path = "Target Support Files/Pods-CurrencyPlay/Pods-CurrencyPlay.release.xcconfig"; sourceTree = "<group>"; };
 		CB7F8F8E45B7F84803E356C1 /* Pods_CurrencyPlay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrencyPlay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				479BE7AD23B8C3BC00FEB132 /* ExchangeListViewController.swift */,
+				47E625A723BE865400033159 /* PrivatCurrencyItem.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -82,9 +93,37 @@
 				479BE7A923B8C3BC00FEB132 /* AppDelegate.swift */,
 				479BE7AB23B8C3BC00FEB132 /* SceneDelegate.swift */,
 				471DEA4223B8CF83002D4DC9 /* Modules */,
+				47E6259C23BE7B0500033159 /* Network */,
 				471DEA4323B8CF91002D4DC9 /* Resources */,
 			);
 			path = CurrencyPlay;
+			sourceTree = "<group>";
+		};
+		47E6259C23BE7B0500033159 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				47E6259D23BE7C4000033159 /* Requests */,
+				47E625A223BE80F600033159 /* Services */,
+				47E625A523BE818E00033159 /* ResponseParser.swift */,
+				47E625A023BE7D1000033159 /* Moya+Defaults.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		47E6259D23BE7C4000033159 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				47E6259E23BE7C6700033159 /* PrivatBankAPI.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		47E625A223BE80F600033159 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				47E625A323BE810500033159 /* PrivatBankService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		AA6A0D99E0A7A48EC02D9992 /* Pods */ = {
@@ -93,7 +132,6 @@
 				47EF2E7DE1CCE3D5E58630C0 /* Pods-CurrencyPlay.debug.xcconfig */,
 				7571680089CFD83462D3221E /* Pods-CurrencyPlay.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -221,7 +259,12 @@
 			files = (
 				479BE7AE23B8C3BC00FEB132 /* ExchangeListViewController.swift in Sources */,
 				479BE7AA23B8C3BC00FEB132 /* AppDelegate.swift in Sources */,
+				47E6259F23BE7C6700033159 /* PrivatBankAPI.swift in Sources */,
+				47E625A423BE810500033159 /* PrivatBankService.swift in Sources */,
+				47E625A123BE7D1000033159 /* Moya+Defaults.swift in Sources */,
 				479BE7AC23B8C3BC00FEB132 /* SceneDelegate.swift in Sources */,
+				47E625A823BE865400033159 /* PrivatCurrencyItem.swift in Sources */,
+				47E625A623BE818E00033159 /* ResponseParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
