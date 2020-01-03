@@ -10,7 +10,9 @@ import Foundation
 import Moya
 
 enum PrivatBankAPI {
+    /// https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5
     case exchangeRate
+    /// https://api.privatbank.ua/p24api/pboffice?city=Днепропетровск&address=Титова
     case offices
 }
 
