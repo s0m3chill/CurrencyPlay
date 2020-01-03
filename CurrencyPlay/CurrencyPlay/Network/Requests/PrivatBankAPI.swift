@@ -11,6 +11,7 @@ import Moya
 
 enum PrivatBankAPI {
     case exchangeRate
+    case offices
 }
 
 extension PrivatBankAPI: TargetType {
@@ -27,6 +28,8 @@ extension PrivatBankAPI: TargetType {
         switch self {
         case .exchangeRate:
             return "pubinfo"
+        case .offices:
+            return "pboffice"
         }
     }
     
@@ -37,7 +40,10 @@ extension PrivatBankAPI: TargetType {
     var task: Task {
         switch self {
         case .exchangeRate:
-            let params: [String: Any] = ["json": "", "exchange": "", "courseid": 5]
+            let params: [String: Any] = ["json": "", "exchange": "", "coursid": "5"]
+            return Task.requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .offices:
+            let params: [String: Any] = ["json": "", "city": "Львов", "address": ""]
             return Task.requestParameters(parameters: params, encoding: URLEncoding.default)
         }
     }

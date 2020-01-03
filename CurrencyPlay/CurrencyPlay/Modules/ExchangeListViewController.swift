@@ -14,13 +14,8 @@ class ExchangeListViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view.backgroundColor = .white
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        privatProvider.getExchangeRates()
+        view.backgroundColor = .white
     }
 
 }
