@@ -13,7 +13,7 @@ class CombinedRatesService {
     
     private let provider = MoyaProvider<CombinedRatesAPI>()
     
-    func getExchangeRates(completion: @escaping ([OrganizationItem]) -> Void) {
+    func getExchangeRates(completion: @escaping ([CombinedCurrencyItem]) -> Void) {
         request(target: .exchangeRates,
                 success: { response in
             guard let organizationsArray = response["organizations"] as? [[String: Any]] else {
@@ -21,11 +21,14 @@ class CombinedRatesService {
                 return
             }
                     
-            var organizations: [OrganizationItem] = []
+            var organizations: [CombinedCurrencyItem] = []
             for item in organizationsArray {
                 let jsonData = try! JSONSerialization.data(withJSONObject: item, options: .prettyPrinted)
-                let organization = try! JSONDecoder().decode(OrganizationItem.self, from: jsonData)
-                organizations.append(organization)
+                let organization = try! JSONDecoder().decode(CombinedCurrencyItem.self, from: jsonData)
+                // Lviv
+                if organization.cityId == "7oiylpmiow8iy1smadr" {
+                    organizations.append(organization)
+                }
             }
                             
             completion(organizations)
