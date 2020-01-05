@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0BF4B0EB05F961568AE84D88 /* Pods_CurrencyPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB7F8F8E45B7F84803E356C1 /* Pods_CurrencyPlay.framework */; };
 		47759FBE23BFE9190023DD7F /* PrivatOfficeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */; };
+		47759FC023C1E8E60023DD7F /* CombinedRatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */; };
+		47759FC223C1EE320023DD7F /* CombinedRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FC123C1EE320023DD7F /* CombinedRatesService.swift */; };
+		47759FC423C1F39F0023DD7F /* OrganizationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FC323C1F39F0023DD7F /* OrganizationItem.swift */; };
 		479BE7AA23B8C3BC00FEB132 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479BE7A923B8C3BC00FEB132 /* AppDelegate.swift */; };
 		479BE7AC23B8C3BC00FEB132 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479BE7AB23B8C3BC00FEB132 /* SceneDelegate.swift */; };
 		479BE7AE23B8C3BC00FEB132 /* ExchangeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479BE7AD23B8C3BC00FEB132 /* ExchangeListViewController.swift */; };
@@ -24,6 +27,9 @@
 
 /* Begin PBXFileReference section */
 		47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatOfficeItem.swift; sourceTree = "<group>"; };
+		47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRatesAPI.swift; sourceTree = "<group>"; };
+		47759FC123C1EE320023DD7F /* CombinedRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRatesService.swift; sourceTree = "<group>"; };
+		47759FC323C1F39F0023DD7F /* OrganizationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationItem.swift; sourceTree = "<group>"; };
 		479BE7A623B8C3BC00FEB132 /* CurrencyPlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyPlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		479BE7A923B8C3BC00FEB132 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		479BE7AB23B8C3BC00FEB132 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +66,7 @@
 				479BE7AD23B8C3BC00FEB132 /* ExchangeListViewController.swift */,
 				47E625A723BE865400033159 /* PrivatCurrencyItem.swift */,
 				47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */,
+				47759FC323C1F39F0023DD7F /* OrganizationItem.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -120,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				47E6259E23BE7C6700033159 /* PrivatBankAPI.swift */,
+				47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -128,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				47E625A323BE810500033159 /* PrivatBankService.swift */,
+				47759FC123C1EE320023DD7F /* CombinedRatesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -274,8 +283,11 @@
 				479BE7AE23B8C3BC00FEB132 /* ExchangeListViewController.swift in Sources */,
 				479BE7AA23B8C3BC00FEB132 /* AppDelegate.swift in Sources */,
 				47E6259F23BE7C6700033159 /* PrivatBankAPI.swift in Sources */,
+				47759FC423C1F39F0023DD7F /* OrganizationItem.swift in Sources */,
 				47E625A423BE810500033159 /* PrivatBankService.swift in Sources */,
+				47759FC023C1E8E60023DD7F /* CombinedRatesAPI.swift in Sources */,
 				47FF887A23BFDD5E0051F45F /* Decodable+Extensions.swift in Sources */,
+				47759FC223C1EE320023DD7F /* CombinedRatesService.swift in Sources */,
 				47E625A123BE7D1000033159 /* Moya+Defaults.swift in Sources */,
 				479BE7AC23B8C3BC00FEB132 /* SceneDelegate.swift in Sources */,
 				47E625A823BE865400033159 /* PrivatCurrencyItem.swift in Sources */,

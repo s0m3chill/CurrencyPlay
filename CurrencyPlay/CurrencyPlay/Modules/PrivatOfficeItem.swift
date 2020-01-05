@@ -9,13 +9,13 @@
 import Foundation
 
 struct PrivatOfficeItem: Codable {
-    var id: String
-    var city: String
-    var index: String
-    var country: String
-    var address: String
-    var email: String
-    var state: String
-    var phone: String
-    var name: String
+    let id: String
+    let city: String
+    let index: String
+    let country: String
+    let address: String
+    let email: String
+    let state: String
+    let phone: String
+    let name: String
 }

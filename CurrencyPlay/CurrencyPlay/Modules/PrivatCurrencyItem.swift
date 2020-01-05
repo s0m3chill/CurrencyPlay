@@ -9,8 +9,8 @@
 import Foundation
 
 struct PrivatCurrencyItem: Codable {
-    var ccy: String
-    var base_ccy: String
-    var buy: String
-    var sale: String
+    let ccy: String
+    let base_ccy: String
+    let buy: String
+    let sale: String
 }

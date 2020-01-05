@@ -52,9 +52,9 @@ class PrivatBankService {
         provider.request(target) { result in
             switch result {
             case .success(let response):
-                ResponseParser.parse(response: response,
-                                     urlPath: target.path,
-                                     callback: { dataDict in
+                ResponseParser.parseJsonArray(response: response,
+                                              urlPath: target.path,
+                                              callback: { dataDict in
                     successCallback(dataDict)
                 }, failure: { error in
                     failureCallback(MoyaError.jsonMapping(response))
