@@ -11,7 +11,7 @@ import Moya
 
 enum CombinedRatesAPI {
     /// http://resources.finance.ua/ua/public/currency-cash.json
-    /// App must include reference to  https://finance.ua/ru/currency
+    /// App must include reference to  https://finance.ua/ua/currency
     case exchangeRates
 }
 

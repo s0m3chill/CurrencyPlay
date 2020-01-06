@@ -24,17 +24,19 @@ class ExchangeOverviewPresenter {
 
 // MARK: - extending ExchangeOverviewPresenter to implement it's protocol
 extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
+    
     func fetch(objectFor view: ExchangeOverviewViewProtocol) {
+        interactor.fetch(objectFor: self)
+    }
+    
+    func interactor(_ interactor: ExchangeOverviewInteractorProtocol,
+                    didFetch object: ExchangeOverviewEntity) {
         
     }
     
-    func interactor(_ interactor: ExchangeOverviewInteractorProtocol, didFetch object: ExchangeOverviewEntity) {
+    func interactor(_ interactor: ExchangeOverviewInteractorProtocol,
+                    didFailWith error: Error) {
         
     }
-    
-    func interactor(_ interactor: ExchangeOverviewInteractorProtocol, didFailWith error: Error) {
-        
-    }
-    
     
 }

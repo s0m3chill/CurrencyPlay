@@ -53,7 +53,7 @@ extension ExchangeOverviewView: ExchangeOverviewViewUIDelegate {
 extension ExchangeOverviewView: ExchangeOverviewViewUIDataSource {
     
     func objectFor(ui: ExchangeOverviewViewUI) -> ExchangeOverviewEntity {
-        return ExchangeOverviewEntity()
+        return object!
     }
     
     // Pass the pre-defined object to the dataSource.

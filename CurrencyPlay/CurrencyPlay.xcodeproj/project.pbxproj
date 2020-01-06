@@ -15,6 +15,7 @@
 		4708956C23C332CB003F27D6 /* ExchangeOverviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708956523C332CB003F27D6 /* ExchangeOverviewInteractor.swift */; };
 		4708956D23C332CB003F27D6 /* ExchangeOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708956623C332CB003F27D6 /* ExchangeOverviewView.swift */; };
 		4708956E23C332CB003F27D6 /* ExchangeOverviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708956723C332CB003F27D6 /* ExchangeOverviewEntity.swift */; };
+		472D6A8823C3694C004D46C0 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D6A8723C3694C004D46C0 /* Errors.swift */; };
 		47759FBE23BFE9190023DD7F /* PrivatOfficeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */; };
 		47759FC023C1E8E60023DD7F /* CombinedRatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */; };
 		47759FC223C1EE320023DD7F /* CombinedRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FC123C1EE320023DD7F /* CombinedRatesService.swift */; };
@@ -39,6 +40,7 @@
 		4708956523C332CB003F27D6 /* ExchangeOverviewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOverviewInteractor.swift; sourceTree = "<group>"; };
 		4708956623C332CB003F27D6 /* ExchangeOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOverviewView.swift; sourceTree = "<group>"; };
 		4708956723C332CB003F27D6 /* ExchangeOverviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOverviewEntity.swift; sourceTree = "<group>"; };
+		472D6A8723C3694C004D46C0 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatOfficeItem.swift; sourceTree = "<group>"; };
 		47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRatesAPI.swift; sourceTree = "<group>"; };
 		47759FC123C1EE320023DD7F /* CombinedRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRatesService.swift; sourceTree = "<group>"; };
@@ -86,13 +88,21 @@
 			path = ExchangeOverview;
 			sourceTree = "<group>";
 		};
+		4708957023C340F7003F27D6 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				47E625A723BE865400033159 /* PrivatCurrencyItem.swift */,
+				47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */,
+				47759FC823C214DB0023DD7F /* CombinedCurrencyItem.swift */,
+				472D6A8723C3694C004D46C0 /* Errors.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
 		471DEA4223B8CF83002D4DC9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				4708956F23C33319003F27D6 /* ExchangeOverview */,
-				47E625A723BE865400033159 /* PrivatCurrencyItem.swift */,
-				47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */,
-				47759FC823C214DB0023DD7F /* CombinedCurrencyItem.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -113,6 +123,7 @@
 				479BE7A923B8C3BC00FEB132 /* AppDelegate.swift */,
 				479BE7AB23B8C3BC00FEB132 /* SceneDelegate.swift */,
 				471DEA4223B8CF83002D4DC9 /* Modules */,
+				4708957023C340F7003F27D6 /* Datasource */,
 				47E6259C23BE7B0500033159 /* Network */,
 				47FF887B23BFE6B50051F45F /* Utils */,
 			);
@@ -330,6 +341,7 @@
 				4708956923C332CB003F27D6 /* ExchangeOverviewPresenter.swift in Sources */,
 				47759FBE23BFE9190023DD7F /* PrivatOfficeItem.swift in Sources */,
 				4708956823C332CB003F27D6 /* ExchangeOverviewViewUI.swift in Sources */,
+				472D6A8823C3694C004D46C0 /* Errors.swift in Sources */,
 				47E625A623BE818E00033159 /* ResponseParser.swift in Sources */,
 				4708956E23C332CB003F27D6 /* ExchangeOverviewEntity.swift in Sources */,
 				4708956B23C332CB003F27D6 /* ExchangeOverviewContracts.swift in Sources */,
