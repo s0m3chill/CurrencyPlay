@@ -31,7 +31,7 @@ extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
     
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol,
                     didFetch object: ExchangeOverviewEntity) {
-        
+        _view?.set(object: object)
     }
     
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol,

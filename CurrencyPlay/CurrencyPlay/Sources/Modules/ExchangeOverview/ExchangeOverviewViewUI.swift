@@ -27,24 +27,35 @@ class ExchangeOverviewViewUI: UIView {
     var delegate: ExchangeOverviewViewUIDelegate?
     var dataSource: ExchangeOverviewViewUIDataSource?
     
-    var object : ExchangeOverviewEntity?
+    private var object : ExchangeOverviewEntity!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUIElements()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    private lazy var stackView: UIStackView = {
+        let ret = UIStackView()
+        ret.translatesAutoresizingMaskIntoConstraints = false
+        ret.axis = .vertical
+        
+        addSubview(ret)
+        
+        ret.topAnchor.constraint(equalTo: self.topAnchor, constant: 100).isActive = true
+        ret.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        ret.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        
+        return ret
+    }()
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
+        
         setupConstraints()
+        backgroundColor = .white
     }
     
     fileprivate func setupUIElements() {
-        // arrange subviews
+        for item in object.banksCurrencies {
+            let label = UILabel()
+            label.text = "\(item.name), buy: \(item.buy), sale: \(item.sale)"
+            stackView.addArrangedSubview(label)
+        }
     }
     
     fileprivate func setupConstraints() {
@@ -53,8 +64,11 @@ class ExchangeOverviewViewUI: UIView {
     
     /// Reloading the data and update the ui according to the new data
     func reloadData() {
-        self.object = dataSource?.objectFor(ui: self)
-        // Should update UI
+        guard let dataObject = dataSource?.objectFor(ui: self) else {
+            return
+        }
+        self.object = dataObject
+        setupUIElements()
     }
     
 }

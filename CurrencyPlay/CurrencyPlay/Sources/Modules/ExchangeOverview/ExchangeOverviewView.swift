@@ -29,8 +29,6 @@ class ExchangeOverviewView: UIViewController {
         
         // Informs the Presenter that the View is ready to receive data.
         presenter.fetch(objectFor: self)
-        
-        view.backgroundColor = .red
     }
     
 }
@@ -39,7 +37,8 @@ class ExchangeOverviewView: UIViewController {
 extension ExchangeOverviewView: ExchangeOverviewViewProtocol {
     
     func set(object: ExchangeOverviewEntity) {
-        
+        self.object = object
+        ui.reloadData()
     }
     
 }
