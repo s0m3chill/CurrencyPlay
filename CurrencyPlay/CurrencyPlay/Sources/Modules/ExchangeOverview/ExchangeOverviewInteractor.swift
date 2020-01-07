@@ -15,29 +15,36 @@ class ExchangeOverviewInteractor: ExchangeOverviewInteractorProtocol {
     private let combinedService = CombinedRatesService()
     
     func fetch(objectFor presenter: ExchangeOverviewPresenterProtocol) {
-        privatService.getExchangeRates { rates in
-            guard let usdRate = (rates.filter { $0.ccy == "USD" }.first) else {
-                presenter.interactor(self, didFailWith: FetchErrors.privatCurrencyNoUsd)
-                return
+        let fetchQueue = OperationQueue()
+        
+        var bankInfos: [ExchangeOverviewEntity.BankCurrencyInfo] = []
+        let combinedFetchOperation = BlockOperation {
+            self.combinedService.getExchangeRates { rates in
+                for rate in rates {
+                    let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: rate.title,
+                                                                           buy: rate.currencies.bid,
+                                                                           sale: rate.currencies.ask)
+                    bankInfos.append(bankInfo)
+                }
             }
-            let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: "Приватбанк",
-                                                                   buy: usdRate.buy,
-                                                                   sale: usdRate.sale)
-       
-            presenter.interactor(self, didFetch: ExchangeOverviewEntity(banksCurrencies: [bankInfo]))
         }
         
-        combinedService.getExchangeRates { rates in
-            var bankInfos: [ExchangeOverviewEntity.BankCurrencyInfo] = []
-            for rate in rates {
-                let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: rate.title,
-                                                                       buy: rate.currencies.bid,
-                                                                       sale: rate.currencies.ask)
+        let privatFetchOperation = BlockOperation {
+            self.privatService.getExchangeRates { rates in
+                guard let usdRate = (rates.filter { $0.ccy == "USD" }.first) else {
+                    presenter.interactor(self, didFailWith: FetchErrors.privatCurrencyNoUsd)
+                    return
+                }
+                let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: "Приватбанк",
+                                                                       buy: usdRate.buy,
+                                                                       sale: usdRate.sale)
                 bankInfos.append(bankInfo)
+                presenter.interactor(self, didFetch: ExchangeOverviewEntity(banksCurrencies: bankInfos))
             }
-            presenter.interactor(self, didFetch: ExchangeOverviewEntity(banksCurrencies: bankInfos))
         }
+        
+        privatFetchOperation.addDependency(combinedFetchOperation)
+        fetchQueue.addOperations([combinedFetchOperation, privatFetchOperation], waitUntilFinished: true)
     }
         
-
 }
