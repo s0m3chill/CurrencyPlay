@@ -14,6 +14,7 @@ class ExchangeOverviewPresenter {
     weak private var _view: ExchangeOverviewViewProtocol?
     private var interactor: ExchangeOverviewInteractorProtocol
     private var wireframe: ExchangeOverviewRouterProtocol
+    private var object: ExchangeOverviewEntity?
     
     init(view: ExchangeOverviewViewProtocol) {
         self._view = view
@@ -31,12 +32,40 @@ extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
     
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol,
                     didFetch object: ExchangeOverviewEntity) {
-        _view?.set(object: object)
+        self.object = object
+        _view?.reloadData()
     }
     
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol,
                     didFailWith error: Error) {
         
+    }
+    
+    func view(_ view: ExchangeOverviewViewProtocol, didSelectRow atIndex: Int) {
+        guard let selectedObject = object?.banksCurrencies[atIndex] else {
+            return
+        }
+        wireframe.showDetailsFor(object: selectedObject, parentViewController: view)
+    }
+    
+}
+
+extension ExchangeOverviewPresenter: ExchangeOverviewViewUIDataSource {
+    
+    func sectionsCount() -> Int {
+        return 1
+    }
+    
+    func rowsCount() -> Int {
+        return object?.banksCurrencies.count ?? 0
+    }
+    
+    func title(for row: Int) -> String {
+        guard let obj = object else {
+            return ""
+        }
+        let currency = obj.banksCurrencies[row]
+        return "\(currency.name), buy: \(currency.buy), sale: \(currency.sale)"
     }
     
 }

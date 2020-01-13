@@ -11,34 +11,27 @@ import UIKit
 // MARK: ExchangeOverviewViewUI Delegate -
 /// ExchangeOverviewViewUI Delegate
 protocol ExchangeOverviewViewUIDelegate {
-    // Send Events to Module View, that will send events to the Presenter; which will send events to the Receiver e.g. Protocol OR Component.
+    func view(_ view: ExchangeOverviewViewUI, didSelectRow at: Int)
 }
 
 // MARK: ExchangeOverviewViewUI Data Source -
 /// ExchangeOverviewViewUI Data Source
 protocol ExchangeOverviewViewUIDataSource {
-    // This will be implemented in the Module View.
-    /// Set Object for the UI Component
-    func objectFor(ui: ExchangeOverviewViewUI) -> ExchangeOverviewEntity
+    func sectionsCount() -> Int
+    func rowsCount() -> Int
+    func title(for row: Int) -> String
 }
 
 class ExchangeOverviewViewUI: UIView {
     
     var delegate: ExchangeOverviewViewUIDelegate?
     var dataSource: ExchangeOverviewViewUIDataSource?
-    
-    private var object : ExchangeOverviewEntity!
-    
-    private lazy var stackView: UIStackView = {
-        let ret = UIStackView()
+        
+    private lazy var tableView: UITableView = {
+        let ret = UITableView()
         ret.translatesAutoresizingMaskIntoConstraints = false
-        ret.axis = .vertical
-        
-        addSubview(ret)
-        
-        ret.topAnchor.constraint(equalTo: self.topAnchor, constant: 100).isActive = true
-        ret.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        ret.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        ret.dataSource = self
+        ret.delegate = self
         
         return ret
     }()
@@ -47,28 +40,55 @@ class ExchangeOverviewViewUI: UIView {
         super.didMoveToWindow()
         
         setupConstraints()
-        backgroundColor = .white
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     fileprivate func setupUIElements() {
-        for item in object.banksCurrencies {
-            let label = UILabel()
-            label.text = "\(item.name), buy: \(item.buy), sale: \(item.sale)"
-            stackView.addArrangedSubview(label)
-        }
+        backgroundColor = .white
     }
     
     fileprivate func setupConstraints() {
-        // add constraints to subviews
+        addSubview(tableView)
+        
+        tableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 100).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
     
     /// Reloading the data and update the ui according to the new data
     func reloadData() {
-        guard let dataObject = dataSource?.objectFor(ui: self) else {
-            return
-        }
-        self.object = dataObject
         setupUIElements()
+        tableView.reloadData()
+    }
+    
+}
+
+extension ExchangeOverviewViewUI: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dataSource?.sectionsCount() ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource?.rowsCount() ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell()
+        }
+        cell.textLabel?.text = dataSource?.title(for: indexPath.row)
+        
+        return cell
+    }
+    
+}
+
+extension ExchangeOverviewViewUI: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.view(self, didSelectRow: indexPath.row)
     }
     
 }

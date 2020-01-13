@@ -11,11 +11,11 @@ import UIKit
 /// ExchangeOverview Module View
 class ExchangeOverviewView: UIViewController {
     
+    private typealias Presenter = (ExchangeOverviewPresenterProtocol & ExchangeOverviewViewUIDataSource)
+    
     private let ui = ExchangeOverviewViewUI()
-    private var presenter: ExchangeOverviewPresenterProtocol!
-    
-    private var object : ExchangeOverviewEntity?
-    
+    private var presenter: Presenter!
+        
     override func loadView() {
         // setting the custom view as the view controller's view
         ui.delegate = self
@@ -36,8 +36,7 @@ class ExchangeOverviewView: UIViewController {
 // MARK: - extending ExchangeOverviewView to implement it's protocol
 extension ExchangeOverviewView: ExchangeOverviewViewProtocol {
     
-    func set(object: ExchangeOverviewEntity) {
-        self.object = object
+    func reloadData() {
         ui.reloadData()
     }
     
@@ -46,14 +45,25 @@ extension ExchangeOverviewView: ExchangeOverviewViewProtocol {
 // MARK: - extending ExchangeOverviewView to implement the custom ui view delegate
 extension ExchangeOverviewView: ExchangeOverviewViewUIDelegate {
     
+    func view(_ view: ExchangeOverviewViewUI, didSelectRow at: Int) {
+        presenter.view(self, didSelectRow: at)
+    }
+     
 }
 
 // MARK: - extending ExchangeOverviewView to implement the custom ui view data source
 extension ExchangeOverviewView: ExchangeOverviewViewUIDataSource {
     
-    func objectFor(ui: ExchangeOverviewViewUI) -> ExchangeOverviewEntity {
-        return object!
+    func sectionsCount() -> Int {
+        return presenter.sectionsCount()
     }
     
-    // Pass the pre-defined object to the dataSource.
+    func rowsCount() -> Int {
+        return presenter.rowsCount()
+    }
+    
+    func title(for row: Int) -> String {
+        return presenter.title(for: row)
+    }
+    
 }

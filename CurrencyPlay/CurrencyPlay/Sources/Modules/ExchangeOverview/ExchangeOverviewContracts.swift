@@ -15,10 +15,8 @@ import UIKit
  & Implement common view functions.
  */
 /// ExchangeOverview Module View Protocol
-protocol ExchangeOverviewViewProtocol: class {
-    // Update UI with value returned.
-    /// Set the view Object of Type ExchangeOverviewEntity
-    func set(object: ExchangeOverviewEntity)
+protocol ExchangeOverviewViewProtocol where Self: UIViewController {
+    func reloadData()
 }
 
 //MARK: Interactor -
@@ -37,12 +35,13 @@ protocol ExchangeOverviewPresenterProtocol {
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol, didFetch object: ExchangeOverviewEntity)
     /// The Interactor will inform the Presenter a failed fetch.
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol, didFailWith error: Error)
+    func view(_ view: ExchangeOverviewViewProtocol, didSelectRow atIndex: Int)
 }
 
 //MARK: Router (aka: Wireframe) -
 /// ExchangeOverview Module Router Protocol
 protocol ExchangeOverviewRouterProtocol {
-    static func createModule() -> UIViewController
-    // Show Details of Entity Object coming from ParentView Controller.
-    // func showDetailsFor(object: ExchangeOverviewEntity, parentViewController viewController: UIViewController)
+    static func createInitialModule() -> UIViewController
+    func showDetailsFor(object: ExchangeOverviewEntity.BankCurrencyInfo,
+                        parentViewController viewController: ExchangeOverviewViewProtocol)
 }
