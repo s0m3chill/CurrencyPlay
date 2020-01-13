@@ -15,6 +15,7 @@ class ExchangeOverviewPresenter {
     private var interactor: ExchangeOverviewInteractorProtocol
     private var wireframe: ExchangeOverviewRouterProtocol
     private var object: ExchangeOverviewEntity?
+    private var bestBuy: ExchangeOverviewEntity.BankCurrencyInfo?
     
     init(view: ExchangeOverviewViewProtocol) {
         self._view = view
@@ -33,6 +34,11 @@ extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol,
                     didFetch object: ExchangeOverviewEntity) {
         self.object = object
+      
+        guard let bestBuy = (object.banksCurrencies.min { $0.sell < $1.sell }) else {
+            fatalError("no sell info")
+        }
+        self.bestBuy = bestBuy
         _view?.reloadData()
     }
     
@@ -42,10 +48,13 @@ extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
     }
     
     func view(_ view: ExchangeOverviewViewProtocol, didSelectRow atIndex: Int) {
-        guard let selectedObject = object?.banksCurrencies[atIndex] else {
+        guard let selectedExchange = object?.banksCurrencies[atIndex], let bestExchange = bestBuy else {
             return
         }
-        wireframe.showDetailsFor(object: selectedObject, parentViewController: view)
+        
+        let bestRateMapEntity = BestRateMapEntity(selectedExchange: selectedExchange,
+                                                  bestExchange: bestExchange)
+        wireframe.showDetailsFor(object: bestRateMapEntity, parentViewController: view)
     }
     
 }
@@ -65,7 +74,7 @@ extension ExchangeOverviewPresenter: ExchangeOverviewViewUIDataSource {
             return ""
         }
         let currency = obj.banksCurrencies[row]
-        return "\(currency.name), buy: \(currency.buy), sale: \(currency.sale)"
+        return "\(currency.name), buy: \(currency.buy), sale: \(currency.sell)"
     }
     
 }

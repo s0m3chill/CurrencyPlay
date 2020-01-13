@@ -10,4 +10,5 @@ import Foundation
 
 enum FetchErrors: Error {
     case privatCurrencyNoUsd
+    case addressNotGeocoded
 }

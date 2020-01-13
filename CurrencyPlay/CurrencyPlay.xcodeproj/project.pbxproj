@@ -15,6 +15,13 @@
 		4708956C23C332CB003F27D6 /* ExchangeOverviewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708956523C332CB003F27D6 /* ExchangeOverviewInteractor.swift */; };
 		4708956D23C332CB003F27D6 /* ExchangeOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708956623C332CB003F27D6 /* ExchangeOverviewView.swift */; };
 		4708956E23C332CB003F27D6 /* ExchangeOverviewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708956723C332CB003F27D6 /* ExchangeOverviewEntity.swift */; };
+		47264D8323CCB23600079165 /* BestRateMapViewUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D7C23CCB23600079165 /* BestRateMapViewUI.swift */; };
+		47264D8423CCB23600079165 /* BestRateMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D7D23CCB23600079165 /* BestRateMapPresenter.swift */; };
+		47264D8523CCB23600079165 /* BestRateMapRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D7E23CCB23600079165 /* BestRateMapRouter.swift */; };
+		47264D8623CCB23600079165 /* BestRateMapContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D7F23CCB23600079165 /* BestRateMapContracts.swift */; };
+		47264D8723CCB23600079165 /* BestRateMapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D8023CCB23600079165 /* BestRateMapInteractor.swift */; };
+		47264D8823CCB23600079165 /* BestRateMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D8123CCB23600079165 /* BestRateMapView.swift */; };
+		47264D8923CCB23600079165 /* BestRateMapEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47264D8223CCB23600079165 /* BestRateMapEntity.swift */; };
 		472D6A8823C3694C004D46C0 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472D6A8723C3694C004D46C0 /* Errors.swift */; };
 		47759FBE23BFE9190023DD7F /* PrivatOfficeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */; };
 		47759FC023C1E8E60023DD7F /* CombinedRatesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */; };
@@ -40,6 +47,13 @@
 		4708956523C332CB003F27D6 /* ExchangeOverviewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOverviewInteractor.swift; sourceTree = "<group>"; };
 		4708956623C332CB003F27D6 /* ExchangeOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOverviewView.swift; sourceTree = "<group>"; };
 		4708956723C332CB003F27D6 /* ExchangeOverviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeOverviewEntity.swift; sourceTree = "<group>"; };
+		47264D7C23CCB23600079165 /* BestRateMapViewUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapViewUI.swift; sourceTree = "<group>"; };
+		47264D7D23CCB23600079165 /* BestRateMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapPresenter.swift; sourceTree = "<group>"; };
+		47264D7E23CCB23600079165 /* BestRateMapRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapRouter.swift; sourceTree = "<group>"; };
+		47264D7F23CCB23600079165 /* BestRateMapContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapContracts.swift; sourceTree = "<group>"; };
+		47264D8023CCB23600079165 /* BestRateMapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapInteractor.swift; sourceTree = "<group>"; };
+		47264D8123CCB23600079165 /* BestRateMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapView.swift; sourceTree = "<group>"; };
+		47264D8223CCB23600079165 /* BestRateMapEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestRateMapEntity.swift; sourceTree = "<group>"; };
 		472D6A8723C3694C004D46C0 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		47759FBD23BFE9190023DD7F /* PrivatOfficeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatOfficeItem.swift; sourceTree = "<group>"; };
 		47759FBF23C1E8E60023DD7F /* CombinedRatesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRatesAPI.swift; sourceTree = "<group>"; };
@@ -103,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				4708956F23C33319003F27D6 /* ExchangeOverview */,
+				47264D8A23CCB23F00079165 /* BestRateMap */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -115,6 +130,20 @@
 				479BE7B723B8C3BE00FEB132 /* Info.plist */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		47264D8A23CCB23F00079165 /* BestRateMap */ = {
+			isa = PBXGroup;
+			children = (
+				47264D7F23CCB23600079165 /* BestRateMapContracts.swift */,
+				47264D8123CCB23600079165 /* BestRateMapView.swift */,
+				47264D7C23CCB23600079165 /* BestRateMapViewUI.swift */,
+				47264D8023CCB23600079165 /* BestRateMapInteractor.swift */,
+				47264D7D23CCB23600079165 /* BestRateMapPresenter.swift */,
+				47264D8223CCB23600079165 /* BestRateMapEntity.swift */,
+				47264D7E23CCB23600079165 /* BestRateMapRouter.swift */,
+			);
+			path = BestRateMap;
 			sourceTree = "<group>";
 		};
 		4797020E23C3279800E6C9FA /* Sources */ = {
@@ -327,6 +356,8 @@
 			files = (
 				479BE7AA23B8C3BC00FEB132 /* AppDelegate.swift in Sources */,
 				4708956A23C332CB003F27D6 /* ExchangeOverviewRouter.swift in Sources */,
+				47264D8923CCB23600079165 /* BestRateMapEntity.swift in Sources */,
+				47264D8723CCB23600079165 /* BestRateMapInteractor.swift in Sources */,
 				47E6259F23BE7C6700033159 /* PrivatBankAPI.swift in Sources */,
 				47759FC923C214DB0023DD7F /* CombinedCurrencyItem.swift in Sources */,
 				4708956D23C332CB003F27D6 /* ExchangeOverviewView.swift in Sources */,
@@ -340,11 +371,16 @@
 				47E625A823BE865400033159 /* PrivatCurrencyItem.swift in Sources */,
 				4708956923C332CB003F27D6 /* ExchangeOverviewPresenter.swift in Sources */,
 				47759FBE23BFE9190023DD7F /* PrivatOfficeItem.swift in Sources */,
+				47264D8423CCB23600079165 /* BestRateMapPresenter.swift in Sources */,
+				47264D8523CCB23600079165 /* BestRateMapRouter.swift in Sources */,
 				4708956823C332CB003F27D6 /* ExchangeOverviewViewUI.swift in Sources */,
 				472D6A8823C3694C004D46C0 /* Errors.swift in Sources */,
 				47E625A623BE818E00033159 /* ResponseParser.swift in Sources */,
 				4708956E23C332CB003F27D6 /* ExchangeOverviewEntity.swift in Sources */,
+				47264D8323CCB23600079165 /* BestRateMapViewUI.swift in Sources */,
+				47264D8623CCB23600079165 /* BestRateMapContracts.swift in Sources */,
 				4708956B23C332CB003F27D6 /* ExchangeOverviewContracts.swift in Sources */,
+				47264D8823CCB23600079165 /* BestRateMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

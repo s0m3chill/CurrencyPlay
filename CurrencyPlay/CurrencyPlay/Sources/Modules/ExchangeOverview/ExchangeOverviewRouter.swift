@@ -11,12 +11,12 @@ import UIKit
 /// ExchangeOverview Module Router (aka: Wireframe)
 class ExchangeOverviewRouter: ExchangeOverviewRouterProtocol {
     
-    static func createInitialModule() -> UIViewController {
+    static func createModule() -> UIViewController {
         let view = ExchangeOverviewView()
         return UINavigationController(rootViewController: view)
     }
     
-    func showDetailsFor(object: ExchangeOverviewEntity.BankCurrencyInfo,
+    func showDetailsFor(object: BestRateMapEntity,
                         parentViewController viewController: ExchangeOverviewViewProtocol) {
         guard let rootScene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
               let rootNavigation = rootScene.window?.rootViewController as? UINavigationController
@@ -24,7 +24,8 @@ class ExchangeOverviewRouter: ExchangeOverviewRouterProtocol {
             fatalError("Initial scene not set")
         }
         
-        
+        let bestRateView = BestRateMapRouter.createModule(with: object)
+        rootNavigation.pushViewController(bestRateView, animated: true)
     }
         
 }

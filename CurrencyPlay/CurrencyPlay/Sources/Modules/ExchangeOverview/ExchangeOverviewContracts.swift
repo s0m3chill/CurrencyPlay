@@ -41,7 +41,7 @@ protocol ExchangeOverviewPresenterProtocol {
 //MARK: Router (aka: Wireframe) -
 /// ExchangeOverview Module Router Protocol
 protocol ExchangeOverviewRouterProtocol {
-    static func createInitialModule() -> UIViewController
-    func showDetailsFor(object: ExchangeOverviewEntity.BankCurrencyInfo,
+    static func createModule() -> UIViewController
+    func showDetailsFor(object: BestRateMapEntity,
                         parentViewController viewController: ExchangeOverviewViewProtocol)
 }

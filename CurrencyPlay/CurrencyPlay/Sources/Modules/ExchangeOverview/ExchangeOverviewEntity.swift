@@ -15,12 +15,14 @@ struct ExchangeOverviewEntity {
     struct BankCurrencyInfo {
         let name: String
         let buy: String
-        let sale: String
+        let sell: String
+        let address: String
         
-        init(name: String, buy: String, sale: String) {
+        init(name: String, buy: String, sale: String, address: String) {
             self.name = name
             self.buy = String(format: "%.2f", Double(buy) ?? 0)
-            self.sale = String(format: "%.2f", Double(sale) ?? 0)
+            self.sell = String(format: "%.2f", Double(sale) ?? 0)
+            self.address = address
         }
     }
 }

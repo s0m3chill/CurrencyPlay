@@ -23,7 +23,8 @@ class ExchangeOverviewInteractor: ExchangeOverviewInteractorProtocol {
                 for rate in rates {
                     let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: rate.title,
                                                                            buy: rate.currencies.bid,
-                                                                           sale: rate.currencies.ask)
+                                                                           sale: rate.currencies.ask,
+                                                                           address: rate.address)
                     bankInfos.append(bankInfo)
                 }
             }
@@ -37,7 +38,8 @@ class ExchangeOverviewInteractor: ExchangeOverviewInteractorProtocol {
                 }
                 let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: "Приватбанк",
                                                                        buy: usdRate.buy,
-                                                                       sale: usdRate.sale)
+                                                                       sale: usdRate.sale,
+                                                                       address: "вул. Героїв УПА, 76")
                 bankInfos.append(bankInfo)
                 presenter.interactor(self, didFetch: ExchangeOverviewEntity(banksCurrencies: bankInfos))
             }
