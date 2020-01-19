@@ -12,12 +12,17 @@ import CoreLocation
 class BestRateMapInteractor: BestRateMapInteractorProtocol {
     
     func fetch(objectFor presenter: BestRateMapPresenterProtocol, with entity: BestRateMapEntity) {
-        let fetchQueue = OperationQueue()
-        
         var selectedCoords: CLLocationCoordinate2D?
-        let selectedCurrencyGeocode = BlockOperation {
+        var bestCoords: CLLocationCoordinate2D?
+
+        let group = DispatchGroup()
+        let queue = DispatchQueue.global(qos: .userInitiated)
+        
+        group.enter()
+        queue.async(group: group) {
             let geocoder = CLGeocoder()
             geocoder.geocodeAddressString(entity.selectedExchange.address) { [weak self] placemark, error in
+                defer { group.leave() }
                 guard let sself = self else { return }
                 
                 guard let place = placemark,
@@ -31,25 +36,30 @@ class BestRateMapInteractor: BestRateMapInteractorProtocol {
             }
         }
         
-        let bestCurrencyGeocode = BlockOperation {
+        group.enter()
+        queue.async(group: group) {
             let geocoder = CLGeocoder()
             geocoder.geocodeAddressString(entity.bestExchange.address) { [weak self] placemark, error in
+                defer { group.leave() }
                 guard let sself = self else { return }
                 
                 guard let place = placemark,
-                      let coords = place.first?.location?.coordinate,
-                      let selCoords = selectedCoords
+                      let coords = place.first?.location?.coordinate
                 else {
                     presenter.interactor(sself, didFailWith: FetchErrors.addressNotGeocoded)
                     return
                 }
-                let coordinates = ExchangeCoordinates(selected: selCoords, best: coords)
-                presenter.interactor(sself, didFetch: coordinates)
+                
+                bestCoords = coords
             }
         }
         
-        bestCurrencyGeocode.addDependency(selectedCurrencyGeocode)
-        fetchQueue.addOperations([selectedCurrencyGeocode, bestCurrencyGeocode], waitUntilFinished: true)
+        group.notify(queue: DispatchQueue.main) { [weak self] in
+            guard let sself = self else { return }
+            guard let selected = selectedCoords, let best = bestCoords else { return }
+            
+            presenter.interactor(sself, didFetch: ExchangeCoordinates(selected: selected, best: best))
+        }
     }
     
 }
