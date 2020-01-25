@@ -7,41 +7,39 @@
 //
 
 import UIKit
+import MapKit
 
 // MARK: BestRateMapViewUI Delegate -
 /// BestRateMapViewUI Delegate
-protocol BestRateMapViewUIDelegate {
+protocol BestRateMapViewUIDelegate: class {
     // Send Events to Module View, that will send events to the Presenter; which will send events to the Receiver e.g. Protocol OR Component.
 }
 
 class BestRateMapViewUI: UIView {
     
-    var delegate: BestRateMapViewUIDelegate?
+    private weak var delegate: BestRateMapViewUIDelegate?
+    
+    private lazy var mapView: MKMapView = {
+        let ret = MKMapView()
+        ret.translatesAutoresizingMaskIntoConstraints = false
         
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUIElements()
+        return ret
+    }()
+    
+    init(delegate: BestRateMapViewUIDelegate) {
+        self.delegate = delegate
+        super.init(frame: .zero)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMoveToWindow() {
-        super.didMoveToWindow()
-        setupConstraints()
-    }
+}
+
+extension BestRateMapViewUI: BestRateMapViewUIInput {
     
-    fileprivate func setupUIElements() {
-        // arrange subviews
-    }
-    
-    fileprivate func setupConstraints() {
-        // add constraints to subviews
-    }
-    
-    /// Reloading the data and update the ui according to the new data
-    func reloadData(with coordinates: ExchangeCoordinates) {
+    func reloadData() {
         
     }
     

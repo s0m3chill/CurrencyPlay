@@ -7,40 +7,43 @@
 //
 
 import UIKit
+import MapKit
 
 /// BestRateMap Module View
 class BestRateMapView: UIViewController {
     
-    private let ui = BestRateMapViewUI()
-    private var presenter: BestRateMapPresenterProtocol!
+    private var ui: BestRateMapViewUIInput!
+    private let presenter: BestRateMapPresenterProtocol!
+        
+    init(presenter: BestRateMapPresenterProtocol) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+        
+        presenter.set(view: self)
+    }
     
-    private var object : BestRateMapEntity?
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
-        // setting the custom view as the view controller's view
-        ui.delegate = self
+        ui = BestRateMapViewUI(delegate: self)
         view = ui
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        presenter = BestRateMapPresenter(view: self)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        // Informs the Presenter that the View is ready to receive data.
-        presenter.fetchCoordinates(for: self, with: object!)
+        presenter.fetchCoordinates(for: self)
     }
     
 }
 
 // MARK: - extending BestRateMapView to implement it's protocol
-extension BestRateMapView: BestRateMapViewProtocol {
-    
-    func set(object: BestRateMapEntity) {
-        self.object = object
-    }
+extension BestRateMapView: BestRateMapViewInput {
     
     func updateMapWith(coordinates: ExchangeCoordinates) {
-        ui.reloadData(with: coordinates)
+        //ui.reloadData(with: coordinates)
     }
     
 }

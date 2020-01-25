@@ -11,13 +11,13 @@ import UIKit
 /// ExchangeOverview Module Presenter
 class ExchangeOverviewPresenter {
     
-    weak private var _view: ExchangeOverviewViewProtocol?
+    weak private var _view: ExchangeOverviewViewInput?
     private var interactor: ExchangeOverviewInteractorProtocol
     private var wireframe: ExchangeOverviewRouterProtocol
     private var object: ExchangeOverviewEntity?
     private var bestBuy: ExchangeOverviewEntity.BankCurrencyInfo?
     
-    init(view: ExchangeOverviewViewProtocol) {
+    init(view: ExchangeOverviewViewInput) {
         self._view = view
         self.interactor = ExchangeOverviewInteractor()
         self.wireframe = ExchangeOverviewRouter()
@@ -27,7 +27,7 @@ class ExchangeOverviewPresenter {
 // MARK: - extending ExchangeOverviewPresenter to implement it's protocol
 extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
     
-    func fetch(objectFor view: ExchangeOverviewViewProtocol) {
+    func fetch(objectFor view: ExchangeOverviewViewInput) {
         interactor.fetch(objectFor: self)
     }
     
@@ -47,7 +47,7 @@ extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
         
     }
     
-    func view(_ view: ExchangeOverviewViewProtocol, didSelectRow atIndex: Int) {
+    func view(_ view: ExchangeOverviewViewInput, didSelectRow atIndex: Int) {
         guard let selectedExchange = object?.banksCurrencies[atIndex], let bestExchange = bestBuy else {
             return
         }
@@ -59,7 +59,7 @@ extension ExchangeOverviewPresenter: ExchangeOverviewPresenterProtocol {
     
 }
 
-extension ExchangeOverviewPresenter: ExchangeOverviewViewUIDataSource {
+extension ExchangeOverviewPresenter: ExchangeOverviewViewDataSource {
     
     func sectionsCount() -> Int {
         return 1

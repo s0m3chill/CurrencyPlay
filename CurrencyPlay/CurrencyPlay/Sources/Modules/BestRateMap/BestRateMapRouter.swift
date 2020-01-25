@@ -12,8 +12,10 @@ import UIKit
 class BestRateMapRouter: BestRateMapRouterProtocol {
     
     static func createModule(with data: BestRateMapEntity) -> UIViewController {
-        let view = BestRateMapView()
-        view.set(object: data)
+        let presenter = BestRateMapPresenter()
+        presenter.set(object: data)
+        let view = BestRateMapView(presenter: presenter)
+        
         return view
     }
     

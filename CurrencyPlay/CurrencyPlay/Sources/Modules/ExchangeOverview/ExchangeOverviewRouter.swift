@@ -17,7 +17,7 @@ class ExchangeOverviewRouter: ExchangeOverviewRouterProtocol {
     }
     
     func showDetailsFor(object: BestRateMapEntity,
-                        parentViewController viewController: ExchangeOverviewViewProtocol) {
+                        parentViewController viewController: ExchangeOverviewViewInput) {
         guard let rootScene = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
               let rootNavigation = rootScene.window?.rootViewController as? UINavigationController
         else {

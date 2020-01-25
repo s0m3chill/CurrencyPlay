@@ -8,33 +8,40 @@
 
 import UIKit
 
+/// MARK: ExchangeOverviewViewUI Data Source -
+///// ExchangeOverviewViewUI Data Source
+protocol ExchangeOverviewViewDataSource: class {
+    func sectionsCount() -> Int
+    func rowsCount() -> Int
+    func title(for row: Int) -> String
+}
+
 /// ExchangeOverview Module View
 class ExchangeOverviewView: UIViewController {
     
-    private typealias Presenter = (ExchangeOverviewPresenterProtocol & ExchangeOverviewViewUIDataSource)
+    private typealias Presenter = (ExchangeOverviewPresenterProtocol & ExchangeOverviewViewDataSource)
     
-    private let ui = ExchangeOverviewViewUI()
+    private var ui: ExchangeOverviewUIInput!
     private var presenter: Presenter!
         
     override func loadView() {
-        // setting the custom view as the view controller's view
-        ui.delegate = self
-        ui.dataSource = self
+        ui = ExchangeOverviewViewUI(delegate: self)
+        presenter = ExchangeOverviewPresenter(view: self)
+        ui.setupUIElements()
+        
         view = ui
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        presenter = ExchangeOverviewPresenter(view: self)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        // Informs the Presenter that the View is ready to receive data.
         presenter.fetch(objectFor: self)
     }
     
 }
 
 // MARK: - extending ExchangeOverviewView to implement it's protocol
-extension ExchangeOverviewView: ExchangeOverviewViewProtocol {
+extension ExchangeOverviewView: ExchangeOverviewViewInput {
     
     func reloadData() {
         ui.reloadData()
@@ -42,28 +49,32 @@ extension ExchangeOverviewView: ExchangeOverviewViewProtocol {
     
 }
 
-// MARK: - extending ExchangeOverviewView to implement the custom ui view delegate
-extension ExchangeOverviewView: ExchangeOverviewViewUIDelegate {
+extension ExchangeOverviewView: UITableViewDataSource {
     
-    func view(_ view: ExchangeOverviewViewUI, didSelectRow at: Int) {
-        presenter.view(self, didSelectRow: at)
-    }
-     
-}
-
-// MARK: - extending ExchangeOverviewView to implement the custom ui view data source
-extension ExchangeOverviewView: ExchangeOverviewViewUIDataSource {
-    
-    func sectionsCount() -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return presenter.sectionsCount()
     }
     
-    func rowsCount() -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.rowsCount()
     }
     
-    func title(for row: Int) -> String {
-        return presenter.title(for: row)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell()
+        }
+        cell.textLabel?.text = presenter.title(for: indexPath.row)
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+}
+
+extension ExchangeOverviewView: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.view(self, didSelectRow: indexPath.row)
     }
     
 }

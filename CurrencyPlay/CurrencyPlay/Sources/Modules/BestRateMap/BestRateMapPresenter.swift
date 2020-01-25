@@ -11,12 +11,12 @@ import UIKit
 /// BestRateMap Module Presenter
 class BestRateMapPresenter {
     
-    weak private var _view: BestRateMapViewProtocol?
+    weak private var _view: BestRateMapViewInput?
+    private var _object: BestRateMapEntity?
     private var interactor: BestRateMapInteractorProtocol
     private var wireframe: BestRateMapRouterProtocol
     
-    init(view: BestRateMapViewProtocol) {
-        self._view = view
+    init() {
         self.interactor = BestRateMapInteractor()
         self.wireframe = BestRateMapRouter()
     }
@@ -25,8 +25,16 @@ class BestRateMapPresenter {
 // MARK: - extending BestRateMapPresenter to implement it's protocol
 extension BestRateMapPresenter: BestRateMapPresenterProtocol {
     
-    func fetchCoordinates(for view: BestRateMapViewProtocol, with object: BestRateMapEntity) {
-        interactor.fetch(objectFor: self, with: object)
+    func set(view: BestRateMapViewInput) {
+        _view = view
+    }
+    
+    func set(object: BestRateMapEntity) {
+        _object = object
+    }
+    
+    func fetchCoordinates(for view: BestRateMapViewInput) {
+        interactor.fetch(objectFor: self, with: _object!)
     }
     
     func interactor(_ interactor: BestRateMapInteractorProtocol, didFetch coordinates: ExchangeCoordinates) {

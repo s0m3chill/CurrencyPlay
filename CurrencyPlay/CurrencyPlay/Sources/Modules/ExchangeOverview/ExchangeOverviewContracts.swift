@@ -15,7 +15,12 @@ import UIKit
  & Implement common view functions.
  */
 /// ExchangeOverview Module View Protocol
-protocol ExchangeOverviewViewProtocol where Self: UIViewController {
+protocol ExchangeOverviewViewInput where Self: UIViewController {
+    func reloadData()
+}
+
+protocol ExchangeOverviewUIInput where Self: UIView {
+    func setupUIElements()
     func reloadData()
 }
 
@@ -30,12 +35,12 @@ protocol ExchangeOverviewInteractorProtocol {
 /// ExchangeOverview Module Presenter Protocol
 protocol ExchangeOverviewPresenterProtocol {
     /// The presenter will fetch data from the Interactor thru implementing the Interactor fetch function.
-    func fetch(objectFor view: ExchangeOverviewViewProtocol)
+    func fetch(objectFor view: ExchangeOverviewViewInput)
     /// The Interactor will inform the Presenter a successful fetch.
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol, didFetch object: ExchangeOverviewEntity)
     /// The Interactor will inform the Presenter a failed fetch.
     func interactor(_ interactor: ExchangeOverviewInteractorProtocol, didFailWith error: Error)
-    func view(_ view: ExchangeOverviewViewProtocol, didSelectRow atIndex: Int)
+    func view(_ view: ExchangeOverviewViewInput, didSelectRow atIndex: Int)
 }
 
 //MARK: Router (aka: Wireframe) -
@@ -43,5 +48,5 @@ protocol ExchangeOverviewPresenterProtocol {
 protocol ExchangeOverviewRouterProtocol {
     static func createModule() -> UIViewController
     func showDetailsFor(object: BestRateMapEntity,
-                        parentViewController viewController: ExchangeOverviewViewProtocol)
+                        parentViewController viewController: ExchangeOverviewViewInput)
 }
