@@ -9,11 +9,7 @@
 import UIKit
 
 //MARK: View -
-/*
- Should replace "class" with "BaseViewProtocol" if available;
- & that will allow the View to act as a UIViewController;
- & Implement common view functions.
- */
+
 /// ExchangeOverview Module View Protocol
 protocol ExchangeOverviewViewInput where Self: UIViewController {
     func reloadData()

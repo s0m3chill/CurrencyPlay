@@ -28,6 +28,7 @@ class BestRateMapView: UIViewController {
     
     override func loadView() {
         ui = BestRateMapViewUI(delegate: self)
+        ui.setupUIElements()
         view = ui
     }
     
@@ -43,12 +44,36 @@ class BestRateMapView: UIViewController {
 extension BestRateMapView: BestRateMapViewInput {
     
     func updateMapWith(coordinates: ExchangeCoordinates) {
-        //ui.reloadData(with: coordinates)
+        ui.updateMapWith(coordinates: coordinates)
     }
     
 }
 
-// MARK: - extending BestRateMapView to implement the custom ui view delegate
-extension BestRateMapView: BestRateMapViewUIDelegate {
+extension BestRateMapView: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotation") as? MKPinAnnotationView
+        else {
+            return nil
+        }
+    
+        annotationView.pinTintColor = .red
+        annotationView.canShowCallout = true
+        annotationView.animatesDrop = true
+        
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        guard let addedView = views.first,
+              let pinToZoomOn = addedView.annotation
+        else {
+            return
+        }
+        let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        
+        let region = MKCoordinateRegion(center: pinToZoomOn.coordinate, span: span)
+        ui.setMap(region: region)
+    }
     
 }

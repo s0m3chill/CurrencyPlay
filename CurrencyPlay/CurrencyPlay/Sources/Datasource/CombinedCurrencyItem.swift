@@ -37,16 +37,16 @@ struct CombinedCurrencyItem: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(String.self, forKey: .id)
-        oldId = try container.decode(Int.self, forKey: .oldId)
-        orgType = try container.decode(Int.self, forKey: .orgType)
-        branch = try container.decode(Bool.self, forKey: .branch)
-        title = try container.decode(String.self, forKey: .title)
-        regionId = try container.decode(String.self, forKey: .regionId)
-        cityId = try container.decode(String.self, forKey: .cityId)
-        phone = try container.decode(String.self, forKey: .phone)
-        address = try container.decode(String.self, forKey: .address)
-        link = try container.decode(String.self, forKey: .link)
+        id = (try? container.decode(String.self, forKey: .id)) ?? ""
+        oldId = (try? container.decode(Int.self, forKey: .oldId)) ?? 0
+        orgType = (try? container.decode(Int.self, forKey: .orgType)) ?? 0
+        branch = (try? container.decode(Bool.self, forKey: .branch)) ?? false
+        title = (try? container.decode(String.self, forKey: .title)) ?? ""
+        regionId = (try? container.decode(String.self, forKey: .regionId)) ?? ""
+        cityId = (try? container.decode(String.self, forKey: .cityId)) ?? ""
+        phone = (try? container.decode(String.self, forKey: .phone)) ?? ""
+        address = (try? container.decode(String.self, forKey: .address)) ?? ""
+        link = (try? container.decode(String.self, forKey: .link)) ?? ""
         currencies = try container.decode(Currency.self, forKey: .currencies)
     }
     
@@ -61,14 +61,18 @@ struct CombinedCurrencyItem: Decodable {
         }
         
         init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
+            guard let container = try? decoder.container(keyedBy: CodingKeys.self) else {
+                ask = ""
+                bid = ""
+                return
+            }
             guard let usd = try? container.nestedContainer(keyedBy: CodingKeys.self, forKey: .usd) else {
                 ask = ""
                 bid = ""
                 return
             }
-            ask = try usd.decode(String.self, forKey: .ask)
-            bid = try usd.decode(String.self, forKey: .bid)
+            ask = (try? usd.decode(String.self, forKey: .ask)) ?? ""
+            bid = (try? usd.decode(String.self, forKey: .bid)) ?? ""
         }
     }
 }

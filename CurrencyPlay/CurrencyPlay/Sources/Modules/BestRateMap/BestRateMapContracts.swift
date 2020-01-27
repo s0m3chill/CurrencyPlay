@@ -7,20 +7,19 @@
 //
 
 import UIKit
+import MapKit
 
 //MARK: View -
-/*
- Should replace "class" with "BaseViewProtocol" if available;
- & that will allow the View to act as a UIViewController;
- & Implement common view functions.
- */
+
 /// BestRateMap Module View Protocol
 protocol BestRateMapViewInput where Self: UIViewController {
     func updateMapWith(coordinates: ExchangeCoordinates)
 }
 
 protocol BestRateMapViewUIInput where Self: UIView {
-    func reloadData()
+    func setupUIElements()
+    func updateMapWith(coordinates: ExchangeCoordinates)
+    func setMap(region: MKCoordinateRegion)
 }
 
 //MARK: Interactor -
