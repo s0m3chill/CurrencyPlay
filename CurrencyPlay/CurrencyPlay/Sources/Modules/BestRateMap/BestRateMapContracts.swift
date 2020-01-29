@@ -18,7 +18,7 @@ protocol BestRateMapViewInput where Self: UIViewController {
 
 protocol BestRateMapViewUIInput where Self: UIView {
     func setupUIElements()
-    func updateMapWith(coordinates: ExchangeCoordinates)
+    func addAndSelect(annotation: MKPointAnnotation)
     func setMap(region: MKCoordinateRegion)
 }
 
@@ -45,5 +45,5 @@ protocol BestRateMapPresenterProtocol {
 //MARK: Router (aka: Wireframe) -
 /// BestRateMap Module Router Protocol
 protocol BestRateMapRouterProtocol {
-    static func createModule(with data: BestRateMapEntity) -> UIViewController
+    func start(with data: BestRateMapEntity, from navigationController: UINavigationController)
 }

@@ -14,8 +14,6 @@ class BestRateMapViewUI: UIView {
     typealias Container = MKMapViewDelegate
     
     private weak var delegate: Container?
-    private var selectedAnnotation = MKPointAnnotation()
-    private var bestAnnotation = MKPointAnnotation()
     
     private lazy var mapView: MKMapView = {
         let ret = MKMapView()
@@ -44,24 +42,13 @@ extension BestRateMapViewUI: BestRateMapViewUIInput {
         mapView.delegate = delegate
     }
     
-    func updateMapWith(coordinates: ExchangeCoordinates) {
-        selectedAnnotation.coordinate = coordinates.selected
-        selectedAnnotation.title = "Selected"
-        mapView.addAnnotation(selectedAnnotation)
-        
-        bestAnnotation.coordinate = coordinates.best
-        bestAnnotation.title = "Best"
-        
-        mapView.selectAnnotation(selectedAnnotation, animated: true)
-        
-        delay(3) {
-            self.mapView.addAnnotation(self.bestAnnotation)
-        }
+    func addAndSelect(annotation: MKPointAnnotation) {
+        mapView.addAnnotation(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
     }
     
     func setMap(region: MKCoordinateRegion) {
         mapView.setRegion(region, animated: true)
-        mapView.selectAnnotation(bestAnnotation, animated: true)
     }
     
 }

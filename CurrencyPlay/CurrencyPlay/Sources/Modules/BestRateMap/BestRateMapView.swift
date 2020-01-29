@@ -14,7 +14,7 @@ class BestRateMapView: UIViewController {
     
     private var ui: BestRateMapViewUIInput!
     private let presenter: BestRateMapPresenterProtocol!
-        
+            
     init(presenter: BestRateMapPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -44,7 +44,19 @@ class BestRateMapView: UIViewController {
 extension BestRateMapView: BestRateMapViewInput {
     
     func updateMapWith(coordinates: ExchangeCoordinates) {
-        ui.updateMapWith(coordinates: coordinates)
+        let selectedAnnotation = MKPointAnnotation()
+        let bestAnnotation = MKPointAnnotation()
+
+        selectedAnnotation.coordinate = coordinates.selected
+        selectedAnnotation.title = "Selected"
+        bestAnnotation.coordinate = coordinates.best
+        bestAnnotation.title = "Best"
+        
+        ui.addAndSelect(annotation: selectedAnnotation)
+        
+        delay(2) {
+            self.ui.addAndSelect(annotation: bestAnnotation)
+        }
     }
     
 }
@@ -70,7 +82,9 @@ extension BestRateMapView: MKMapViewDelegate {
         else {
             return
         }
-        let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        let spanValue: CLLocationDegrees = 0.2
+        let span = MKCoordinateSpan(latitudeDelta: spanValue,
+                                    longitudeDelta: spanValue)
         
         let region = MKCoordinateRegion(center: pinToZoomOn.coordinate, span: span)
         ui.setMap(region: region)

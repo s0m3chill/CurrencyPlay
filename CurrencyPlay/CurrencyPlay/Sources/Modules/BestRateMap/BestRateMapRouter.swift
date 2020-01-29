@@ -11,12 +11,12 @@ import UIKit
 /// BestRateMap Module Router (aka: Wireframe)
 class BestRateMapRouter: BestRateMapRouterProtocol {
     
-    static func createModule(with data: BestRateMapEntity) -> UIViewController {
+    func start(with data: BestRateMapEntity, from navigationController: UINavigationController) {
         let presenter = BestRateMapPresenter()
         presenter.set(object: data)
         let view = BestRateMapView(presenter: presenter)
         
-        return view
+        navigationController.pushViewController(view, animated: true)
     }
     
 }

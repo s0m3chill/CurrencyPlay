@@ -11,7 +11,7 @@ import UIKit
 /// ExchangeOverview Module Router (aka: Wireframe)
 class ExchangeOverviewRouter: ExchangeOverviewRouterProtocol {
     
-    static func createModule() -> UIViewController {
+    static func createInitialModule() -> UIViewController {
         let view = ExchangeOverviewView()
         return UINavigationController(rootViewController: view)
     }
@@ -23,9 +23,9 @@ class ExchangeOverviewRouter: ExchangeOverviewRouterProtocol {
         else {
             fatalError("Initial scene not set")
         }
-        
-        let bestRateView = BestRateMapRouter.createModule(with: object)
-        rootNavigation.pushViewController(bestRateView, animated: true)
+                
+        let bestRateMapRouter = BestRateMapRouter()
+        bestRateMapRouter.start(with: object, from: rootNavigation)
     }
         
 }
