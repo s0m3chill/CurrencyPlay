@@ -27,6 +27,9 @@ class ExchangeOverviewInteractor: ExchangeOverviewInteractorProtocol {
                 guard let sself = self else { return }
                 
                 for rate in rates {
+                    // don't include banks with USD currency absence
+                    guard rate.currencies.ask != "" else { continue }
+                    
                     let bankInfo = ExchangeOverviewEntity.BankCurrencyInfo(name: rate.title,
                                                                            buy: rate.currencies.bid,
                                                                            sale: rate.currencies.ask,
